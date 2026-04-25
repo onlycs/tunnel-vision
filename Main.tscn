@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bx4mq2y7vk3oc"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_drp8a"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_drp8a")
