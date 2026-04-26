@@ -1,9 +1,26 @@
 [gd_scene format=3 uid="uid://0q0kbky44r2n"]
 
+[ext_resource type="Texture2D" uid="uid://dq0trsix0ib2p" path="res://bystander/grandma.png" id="1_ch2m4"]
 [ext_resource type="Texture2D" uid="uid://w4yfeeo3picu" path="res://player/player-die.png" id="1_ocy1w"]
 [ext_resource type="Texture2D" uid="uid://xh0q24mxr7sr" path="res://bystander/bystandard-normal.png" id="2_ch2m4"]
 [ext_resource type="Script" uid="uid://i1xdmi5oqbbq" path="res://bystander/bystander_sprite.gd" id="2_h8or6"]
 [ext_resource type="Texture2D" uid="uid://ch05uj5ap6yjv" path="res://bystander/bystander-anim.png" id="3_ocy1w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaj3v"]
+atlas = ExtResource("1_ch2m4")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sp8ww"]
+atlas = ExtResource("1_ch2m4")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8o5jw"]
+atlas = ExtResource("1_ch2m4")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pega4"]
+atlas = ExtResource("1_ch2m4")
+region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6tlhs"]
 atlas = ExtResource("1_ocy1w")
@@ -75,6 +92,23 @@ region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6tlhs"]
 animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_iaj3v")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_sp8ww")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_8o5jw")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_pega4")
+}],
+"loop": true,
+"name": &"grandma",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6tlhs")
@@ -151,7 +185,7 @@ size = Vector2(75, 75)
 position = Vector2(7.6293945e-06, 3.8146973e-06)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_6tlhs")
-animation = &"runner"
+animation = &"grandma"
 script = ExtResource("2_h8or6")
 
 [node name="Area2D" type="Area2D" parent="bystander_sprite" unique_id=206738463]

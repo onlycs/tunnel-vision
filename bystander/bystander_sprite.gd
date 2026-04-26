@@ -12,7 +12,8 @@ class Bystander:
 
 var RANDOM_SPRITES: Array[Bystander] = [
 	Bystander.new("runner", 100., 8.),
-	Bystander.new("normal", 75., 10.)
+	Bystander.new("normal", 75., 10.),
+	Bystander.new("grandma", 62., 15.),
 ]
 
 var _bystander = RANDOM_SPRITES[randi() % RANDOM_SPRITES.size()]
