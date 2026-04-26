@@ -11,15 +11,24 @@ config_version=5
 [application]
 
 config/name="ieee-gamejam"
-run/main_scene="res://Main.tscn"
+run/main_scene="uid://brl4p50wf2vk5"
 config/features=PackedStringArray("4.6", "Forward Plus")
+run/max_fps=8
 config/icon="res://icon.svg"
+
+[autoload]
+
+Vars="*uid://bjnmqeoi6af3g"
+Ws="uid://cxmga5kjuytru"
+Mjpeg="uid://dlgsu4sot4dok"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/size/resizable=false
+window/stretch/mode="viewport"
 
 [physics]
 
