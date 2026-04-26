@@ -13,12 +13,15 @@ var _bystanders: Array = []
 var _highlighted: Node = null
 var _health: float = MAX_HEALTH
 var _dead: bool = false
+var _score: float = 0.0
 
 @onready var _health_bar = $health
+@onready var _score_label = $score  # change to your label's actual name
 
 func _ready() -> void:
 	_health_bar.max_value = MAX_HEALTH
 	_health_bar.value = _health
+	_score_label.text = "0000"
 	_spawn_bystander()
 	_queue_next_spawn()
 
@@ -26,9 +29,12 @@ func _process(delta: float) -> void:
 	if _dead:
 		return
 	_tick_health(delta)
+	_tick_score(delta)
 	_update_highlight()
-	if Input.is_key_pressed(KEY_E):
-		inherit_highlighted()
+
+func _tick_score(delta: float) -> void:
+	_score += delta
+	_score_label.text = str(int(_score)).lpad(4, "0")
 
 func _tick_health(delta: float) -> void:
 	_health -= delta
@@ -45,7 +51,7 @@ func _queue_next_spawn() -> void:
 	var delay = randf_range(min_delay, max_delay)
 	await get_tree().create_timer(delay).timeout
 	if _dead:
-		return	 # don't spawn after death
+		return
 	_spawn_bystander()
 	_queue_next_spawn()
 
@@ -61,7 +67,6 @@ func _spawn_bystander() -> void:
 var _slowed: bool = false
 
 func _on_bystander_collision(other_area: Area2D, b: Node) -> void:
-	# make sure it's the guy's area, not another bystander
 	if not get_node("guy").is_ancestor_of(other_area):
 		return
 	var sprite = b.get_node("bystander_sprite")
@@ -82,7 +87,6 @@ func _update_highlight() -> void:
 	if _bystanders.is_empty():
 		return
 
-	# filter out gravestones from consideration
 	var living = _bystanders.filter(func(b): 
 		return not b.get_node("bystander_sprite").is_gravestone()
 	)
@@ -115,9 +119,7 @@ func _update_highlight() -> void:
 	nearest.get_node("bystander_sprite").highlight(true)
 	_highlighted = nearest
 
-	
 func inherit_highlighted() -> void:
-	# must have an active highlight (in range, not gravestone)
 	if _highlighted == null or not is_instance_valid(_highlighted):
 		return
 	var sprite = _highlighted.get_node("bystander_sprite")
@@ -127,7 +129,6 @@ func inherit_highlighted() -> void:
 
 	var b = sprite.bystander()
 
-	# stats
 	_health = b.max_health
 	_health_bar.max_value = _health
 	Vars.scroll_speed = b.speed
@@ -136,23 +137,18 @@ func inherit_highlighted() -> void:
 
 	var guy = get_node("guy")
 	
-	# grab world positions before anything moves
 	var old_guy_global_pos = guy.global_position
 	var old_bystander_global_pos = sprite.global_position
 
-	# swap in world space
 	guy.global_position = old_bystander_global_pos
 	sprite.global_position = old_guy_global_pos
 
-	# gravestone
 	sprite.become_gravestone()
 
-	# clear highlight
 	if _highlighted != null and is_instance_valid(_highlighted):
 		sprite.highlight(false)
 	_highlighted = null
 
-	# tween guy to y=400
 	var tween = create_tween()
 	tween.tween_property(guy, "global_position:y", TARGET_Y, 2.0)\
 		.set_trans(Tween.TRANS_SINE)\
@@ -160,3 +156,5 @@ func inherit_highlighted() -> void:
 	
 	tween = create_tween()
 	tween.tween_property(get_node("cop"), "global_position:x", old_bystander_global_pos.x, 1.0).set_ease(Tween.EASE_OUT)
+	
+	$sfx.play()

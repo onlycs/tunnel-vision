@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://brgdkyyuiwgwd" path="res://background/healthbar-square.png" id="7_lgr22"]
 [ext_resource type="Texture2D" uid="uid://boyki5rswl1t" path="res://player/cop.png" id="8_trn2v"]
 [ext_resource type="Script" uid="uid://kvogvld5ug3x" path="res://cop.gd" id="9_03owx"]
+[ext_resource type="FontFile" uid="uid://dfcrj3uu1h31p" path="res://Retro Gaming.ttf" id="10_wkp8b"]
+[ext_resource type="AudioStream" uid="uid://ch7cx8avfu6sd" path="res://music.ogg" id="11_5vvyt"]
+[ext_resource type="Script" uid="uid://bbundlnob3t55" path="res://music.gd" id="11_20pc6"]
+[ext_resource type="AudioStream" uid="uid://xkqqqwnulpd4" path="res://sfx.wav" id="13_c6i3y"]
 
 [sub_resource type="GDScript" id="GDScript_wkp8b"]
 
@@ -99,6 +103,11 @@ size = Vector2(1000, 1000)
 
 [sub_resource type="GDScript" id="GDScript_03owx"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_20pc6"]
+font = ExtResource("10_wkp8b")
+font_size = 42
+font_color = Color(0.827451, 0.654902, 0.09411765, 1)
+
 [node name="Node2D" type="Node2D" unique_id=570826605]
 script = ExtResource("1_3dxm6")
 
@@ -156,8 +165,71 @@ shape = SubResource("RectangleShape2D_trn2v")
 
 [node name="camera" type="TextureRect" parent="CanvasLayer" unique_id=1691296649]
 z_index = 5
-offset_left = 834.0
-offset_top = 112.0
-offset_right = 1217.0
-offset_bottom = 334.0
+offset_left = 829.0
+offset_top = 103.0
+offset_right = 1212.0
+offset_bottom = 325.0
 script = SubResource("GDScript_03owx")
+
+[node name="score" type="Label" parent="." unique_id=1762256466]
+z_index = 20
+offset_left = 161.0
+offset_top = 146.0
+offset_right = 291.0
+offset_bottom = 200.0
+text = "0000"
+label_settings = SubResource("LabelSettings_20pc6")
+
+[node name="score" type="Label" parent="score" unique_id=1919895933]
+z_index = 20
+layout_mode = 0
+offset_left = -60.0
+offset_top = 188.0
+offset_right = 70.0
+offset_bottom = 242.0
+text = "0284"
+label_settings = SubResource("LabelSettings_20pc6")
+
+[node name="score" type="Label" parent="score/score" unique_id=2104959229]
+z_index = 20
+layout_mode = 0
+offset_top = 64.0
+offset_right = 130.0
+offset_bottom = 118.0
+text = "0228"
+label_settings = SubResource("LabelSettings_20pc6")
+
+[node name="score" type="Label" parent="score/score/score" unique_id=52937774]
+z_index = 20
+layout_mode = 0
+offset_top = 64.0
+offset_right = 130.0
+offset_bottom = 118.0
+text = "0201"
+label_settings = SubResource("LabelSettings_20pc6")
+
+[node name="score" type="Label" parent="score/score/score/score" unique_id=669885903]
+z_index = 20
+layout_mode = 0
+offset_top = 64.0
+offset_right = 130.0
+offset_bottom = 118.0
+text = "0179"
+label_settings = SubResource("LabelSettings_20pc6")
+
+[node name="score" type="Label" parent="score/score/score/score/score" unique_id=1449647367]
+z_index = 20
+layout_mode = 0
+offset_top = 64.0
+offset_right = 130.0
+offset_bottom = 128.0
+text = "0142"
+label_settings = SubResource("LabelSettings_20pc6")
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=989379047]
+stream = ExtResource("11_5vvyt")
+volume_db = 3.0
+script = ExtResource("11_20pc6")
+
+[node name="sfx" type="AudioStreamPlayer" parent="." unique_id=352815975]
+stream = ExtResource("13_c6i3y")

@@ -38,8 +38,8 @@ func highlight(enabled: bool) -> void:
 		_indicator = Sprite2D.new()
 		_indicator.texture = preload("res://bystander/yellow_dot.png")
 		_indicator.modulate = Color.YELLOW
-		_indicator.position = Vector2(0, 60)  # relative to sprite, moves with it
-		_indicator.scale = Vector2(0.02, 0.02)
+		_indicator.position = Vector2(0, -80)  # relative to sprite, moves with it
+		_indicator.scale = Vector2(0.35, 0.35)
 		_indicator.z_index = 0
 		_indicator.z_as_relative = false       # absolute z so it's not buried
 		add_child(_indicator)                  # child of self, not get_parent()

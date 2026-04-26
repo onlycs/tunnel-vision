@@ -6,6 +6,7 @@ var slowed = false
 func _ready() -> void:
 	area2.monitoring = true
 	area2.area_entered.connect(_collide)
+	play("default")
 
 func _collide(node: Node) -> void:
 	if node.get_parent().name == "guy":
